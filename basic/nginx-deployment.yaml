@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-dpl
+spec:
+# RollingUpdates default 
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: 
+      maxSurge: 25% # number pod add on top of replicas 
+      maxUnavailable: 25% # pod that can unavailable
+  selector:
+    matchLabels:
+      app: nginx-dpl
+  template:
+    metadata:
+      labels:
+        app: nginx-dpl
+    spec:
+      containers:
+      - name: nginx-dpl
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+
+# cd basic && kubectl delete -f . 
+# kubectl apply -f nginx-deployment.yaml
