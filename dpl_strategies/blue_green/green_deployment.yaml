@@ -1,0 +1,24 @@
+# green deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-green-app
+  labels: 
+    app: demo-app
+    replicas: green 
+spec:
+  selector:
+    matchLabels:
+      app: demo-app
+      replicas: green 
+  template:
+    metadata:
+      labels:
+        app: demo-app
+        replicas: green 
+    spec:
+      containers:
+      - name: reactjs-container 
+        image: 69966/earthdx:78
+        ports:
+        - containerPort: 80
