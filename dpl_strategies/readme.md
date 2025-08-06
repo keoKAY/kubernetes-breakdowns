@@ -12,3 +12,12 @@ kubectl get deployment
 kubectl apply -f service.yaml 
 
 ```
+
+
+## Fixing the sudo kubectl 
+```bash
+mkdir -p $HOME/.kube
+sudo cp /etc/rancher/k3s/k3s.yaml $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+kubectl get node 
+```
