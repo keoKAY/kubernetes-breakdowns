@@ -23,7 +23,11 @@ export KUBECONFIG=$HOME/.kube/config
 kubectl get nodes
 
 ```
+## ROLLING OUT 
+```bash
 
-
-
+```
+curl service-ip 
+## Working with node selector 
+![alt text](image.png)
 

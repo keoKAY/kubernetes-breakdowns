@@ -18,6 +18,8 @@ spec:
         app: canary-app
         tier: version1
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: master1
       containers:
       - name: nginx-app-v1
         image: nginx:latest
