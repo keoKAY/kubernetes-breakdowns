@@ -23,3 +23,7 @@ export KUBECONFIG=$HOME/.kube/config
 kubectl get nodes
 
 ```
+
+
+
+
