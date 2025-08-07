@@ -1,0 +1,26 @@
+# nginx deployment 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-v2-app
+  labels: 
+    app: canary-app 
+    tier: version2
+spec:
+  replicas: 4 # 4 pods = 100%
+  selector:
+    matchLabels:
+      app: canary-app
+      tier: version2
+  template:
+    metadata:
+      labels:
+        app: canary-app
+        tier: version2
+    spec:
+      containers:
+      - name: reactjs-v2
+        image: 69966/earthdx:78
+        ports:
+        - containerPort: 80
+# kubectl apply -f app_deployV2.yaml
