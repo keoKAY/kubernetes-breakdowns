@@ -7,7 +7,7 @@ metadata:
     app: canary-app 
     tier: version2
 spec:
-  replicas: 4 # 4 pods = 100%
+  replicas: 2 # 4 pods = 100%
   selector:
     matchLabels:
       app: canary-app
