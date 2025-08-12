@@ -3,8 +3,8 @@
 ```bash
 kubectl create secret docker-registry ghcr-secret \
   --docker-server=ghcr.io \
-  --docker-username=YOUR_GITHUB_USERNAME \
-  --docker-password=YOUR_GITHUB_PERSONAL_ACCESS_TOKEN \
-  --docker-email=YOUR_EMAIL
+  --docker-username=keokay \
+  --docker-password=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 \
+  --docker-email=keokay888@gmail.com
 
 ```
