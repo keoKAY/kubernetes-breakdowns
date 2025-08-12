@@ -12,8 +12,8 @@ spec:
       labels:
         app: hpa-nginx-app
     spec:
-      nodeSelector: 
-        kubernetes.io/hostname: master1 # node1 
+      # nodeSelector: 
+      #   kubernetes.io/hostname: master1 # node1 
       containers:
       - name: hpa-nginx-app
         image: nginx

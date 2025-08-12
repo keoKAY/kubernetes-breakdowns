@@ -8,3 +8,10 @@ kubectl create secret docker-registry ghcr-secret \
   --docker-email=your-email
 
 ```
+
+```bash
+
+cat /etc/resolv.conf 
+# FQDN
+
+```

@@ -11,12 +11,10 @@ alias k=kubectl
 
 cd hpa 
 kubectl apply -f . 
-
-
+# to get the results from our config 
 kubectl get hpa 
 kubectl get pod 
 kubectl get service 
-
 
 ab -n 10000 -c 100 http://10.233.20.159/
 ```
