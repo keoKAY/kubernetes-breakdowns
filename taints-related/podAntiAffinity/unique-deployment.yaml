@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unique-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: unique-app
+  template:
+    metadata:
+      labels:
+        app: unique-app
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                -  key: app
+                   operator: In
+                   values: 
+                   - backend-app
+              topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: unique-app
+        image: nginx
+        ports:
+        - containerPort: 80
