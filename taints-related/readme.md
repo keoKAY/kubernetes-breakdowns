@@ -16,4 +16,10 @@ kubectl label nodes master3 disktype=ssd
 # to check on the labels of your  node 
 kubectl get node --show-labels | grep "node1"
 kubectl describe node node1 | grep -A 5 "Labels:"
+
+# to see the pod 
+kubectl get pod -o wide 
+
 ```
+
+***
