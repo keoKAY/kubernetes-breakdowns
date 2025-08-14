@@ -1,20 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: earthdx-app
+  name: nginx-app
 spec:
   replicas: 4
   selector:
     matchLabels:
-      app: earthdx-app
+      app: nginx-app
   template:
     metadata:
       labels:
-        app: earthdx-app
+        app: nginx-app
     spec:
       containers:
-      - name: earthdx-app
-# reactjs website 
-        image: 69966/earthdx:78
+      - name: nginx-app
+        image: nginx
         ports:
         - containerPort: 80
