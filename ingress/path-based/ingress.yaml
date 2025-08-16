@@ -1,0 +1,27 @@
+# yaml -> translate reverse config , nginx config 
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: earthdx-ingress
+  annotations: 
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx 
+  rules:
+  - host: k8s-nginx-demo.devnerd.store
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: earthdx-service
+            port: 
+              number: 80
+      - pathType: Prefix
+        path: "/nginx"
+        backend:
+          service:
+            name: nginx-service
+            port: 
+              number: 80

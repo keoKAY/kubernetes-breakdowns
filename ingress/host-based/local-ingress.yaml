@@ -1,0 +1,18 @@
+# yaml -> translate reverse config , nginx config 
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: earthdx-ingress
+spec:
+  ingressClassName: nginx 
+  rules:
+  - host: testing.com.kh
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: nginx-service
+            port: 
+              number: 80

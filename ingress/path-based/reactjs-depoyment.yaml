@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: earthdx-app
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: earthdx-app
+  template:
+    metadata:
+      labels:
+        app: earthdx-app
+    spec:
+      containers:
+      - name: earthdx-app
+# reactjs website 
+        image: 69966/earthdx:78
+        ports:
+        - containerPort: 80
