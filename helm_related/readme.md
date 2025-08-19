@@ -29,4 +29,9 @@ helm upgrade nginx-release nginx-chart --install
 ```bash
 helm create custom-chart 
 
+
+
+# lint
+helm lint chart-name
+helm template chart-name --values prod-values.yaml
 ```
