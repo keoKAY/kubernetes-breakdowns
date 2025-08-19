@@ -1,7 +1,16 @@
 appName:
   app: nginx-stagging
 replicas: 2
+nodeSelector: 
+  kubernetes.io/hostname: node5
 container:
   name: nginx-stag-cont
   image: nginx:1.22.1
   port: 80
+  envs: 
+    - name: POSTGRES_DB
+      value: nginx_db
+    - name: POSTGRES_USERNAME 
+      value: nginx_username
+    - name: POSTGRES_PASSWORD
+      value: password123

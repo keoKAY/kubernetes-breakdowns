@@ -1,3 +1,4 @@
+{{- if gt (int $.Values.replicas ) 4 }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -12,13 +13,26 @@ spec:
       labels:
         app: {{ .Values.appName.app }}-app
     spec:
+    {{- if .Values.nodeSelector }}
+      nodeSelector: 
+    {{- toYaml .Values.nodeSelector | nindent 7 }}
+    {{- end}}
       containers:
-      - name: {{ .Values.container.name }}
-        image: {{ .Values.container.image }}
+    {{- with .Values.container }}
+      - name: {{ .name }}
+        image: {{ .image }}
         resources:
           limits:
             memory: "128Mi"
             cpu: "500m"
         ports:
-        - containerPort: {{ .Values.container.port }}
-
+        - containerPort: {{ .port }}
+    {{- end }}
+        env: 
+    {{- range .Values.container.envs }}
+          - name: {{ .name }}
+            value: {{ .value }}
+    {{- end }} 
+{{- else }}
+  {{- fail "Replicas must be greater than 4 " }}
+{{- end }}
