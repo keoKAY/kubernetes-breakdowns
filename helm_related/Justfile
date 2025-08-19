@@ -7,4 +7,11 @@ render-prod:
 render-stag: 
     helm template custom-chart \
         --values custom-chart/stagging-values.yaml 
-        
+
+install-stag: 
+    helm upgrade custom-release custom-chart \
+        --values custom-chart/stagging-values.yaml --install
+
+install-prod: 
+    helm upgrade custom-release custom-chart \
+        --values custom-chart/prod-values.yaml --install
