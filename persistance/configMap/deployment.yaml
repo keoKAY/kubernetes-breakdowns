@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deploy
+spec:
+  selector:
+    matchLabels:
+      app: postgres-deploy
+  template:
+    metadata:
+      labels:
+        app: postgres-deploy
+    spec:
+      containers:
+      - name: postgres-deploy
+        image: postgres
+        ports:
+        - containerPort: 5432
+        env: 
+          - name: POSTGRES_USER
+            value: postgres_man
+          - name: POSTGRES_PASSWORD
+            value: password123
+          - name: POSTGRES_DB
+            value: postgres_demo_db
