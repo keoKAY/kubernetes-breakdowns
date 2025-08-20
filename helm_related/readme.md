@@ -35,3 +35,19 @@ helm create custom-chart
 helm lint chart-name
 helm template chart-name --values prod-values.yaml
 ```
+*** 
+- using template 
+- rollback and rollout  
+```bash 
+helm list 
+# to show all history of your relase 
+helm history nginx-release 
+helm rollback nginx-release 1
+```
+- application deployment demo
+Ex. Deploy ReactJs 
+    Ingress -> cluster-prod , staging 
+    (stag-values, prod-values )
+
+Argocd 
+GitOps -> Git as a source of truth 

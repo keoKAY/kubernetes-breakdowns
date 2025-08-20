@@ -1,0 +1,36 @@
+{{- define "deployment.tpl" -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName.app }}-dpl
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.appName.app }}-app
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appName.app }}-app
+    spec:
+    {{- if .Values.nodeSelector }}
+      nodeSelector: 
+    {{- toYaml .Values.nodeSelector | nindent 7 }}
+    {{- end}}
+      containers:
+    {{- with .Values.container }}
+      - name: {{ .name }}
+        image: {{ .image }}
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: {{ .port }}
+    {{- end }}
+        env: 
+    {{- range .Values.container.envs }}
+          - name: {{ .name }}
+            value: {{ .value }}
+    {{- end }} 
+{{- end }}

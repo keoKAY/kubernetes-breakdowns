@@ -1,23 +1,21 @@
-# Default values for nginx-chart.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
 # This will set the replicaset count more information can be found here: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
 replicaCount: 1
 
 # This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
 image:
-  repository: nginx
+  repository: 69966/earthdx
   # This sets the pull policy for images.
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "alpine"
+  tag: "78"
+
+
 
 # This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 imagePullSecrets: []
 # This is to override the chart name.
 nameOverride: ""
-fullnameOverride: "first-nginx-helm"
+fullnameOverride: "eartdx-deploy"
 
 # This section builds out the service account more information can be found here: https://kubernetes.io/docs/concepts/security/service-accounts/
 serviceAccount:
@@ -58,20 +56,20 @@ service:
 
 # This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ingress:
-  enabled: false
-  className: ""
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+  enabled: true
+  className: "nginx"
+  annotations: 
+     kubernetes.io/ingress.class: nginx
+     cert-manager.io/cluster-issuer: letsencrypt-stagging
   hosts:
-    - host: chart-example.local
+    - host: tree-plants.devnerd.store
       paths:
         - path: /
-          pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+          pathType: Prefix
+  tls: 
+   - secretName: tree-plants-tls
+     hosts:
+       - tree-plants.devnerd.store
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -117,5 +115,7 @@ volumeMounts: []
 #   readOnly: true
 
 nodeSelector: {}
+
 tolerations: []
+
 affinity: {}
