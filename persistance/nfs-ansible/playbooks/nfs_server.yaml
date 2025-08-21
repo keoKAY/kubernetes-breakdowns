@@ -8,10 +8,9 @@
   vars: 
     nfs_remote_dir: /srv/nfs_shared
     nfs_client_ips:
-      - 10.148.0.17
-      - 10.148.0.18
-      - 10.170.0.2
-      - 10.170.0.3
+      - 192.168.56.11   
+      - 192.168.56.12
+
   tasks: 
     - name: Update APT caches 
       apt: 
