@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-demo-configmap 
+data:
+  POSTGRES_USER: postgres_man
+  POSTGRES_DB: postgres_demo_db
