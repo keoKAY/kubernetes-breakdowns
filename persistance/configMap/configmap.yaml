@@ -1,6 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: myapp
+  name: postgres-demo-configmap 
 data:
-  key: value
+  POSTGRES_USER: postgres_man
+  POSTGRES_PASSWORD: password123
+  POSTGRES_DB: postgres_demo_db

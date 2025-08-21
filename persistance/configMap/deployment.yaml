@@ -16,10 +16,8 @@ spec:
         image: postgres
         ports:
         - containerPort: 5432
-        env: 
-          - name: POSTGRES_USER
-            value: postgres_man
-          - name: POSTGRES_PASSWORD
-            value: password123
-          - name: POSTGRES_DB
-            value: postgres_demo_db
+       # store all the values inside configmap 
+        envFrom: 
+          - configMapRef:
+              name: postgres-demo-configmap
+
