@@ -1,9 +1,7 @@
-# 10.184.0.2 -> worker2
-# 10.148.0.6 -> worker 1
-# 10.148.0.3 -> nfs server 
+# create the idempotent Ansible Playbook 
 ---
 - name: Setup NFS Server 
-  hosts: localhost
+  hosts: node1
   become: yes
   vars: 
     nfs_remote_dir: /srv/nfs_shared
@@ -37,13 +35,6 @@
       vars: 
         export_entries: >-
           {{ nfs_client_ips | map('regex_replace', '^(.*)$', '\g<1>(rw,sync,no_subtree_check,no_root_squash)') | join(' ') }}
-    # - name: Write Config on /etc/exports
-    #   lineinfile: 
-    #     path: /etc/exports
-    #     # line: " {{ nfs_remote_dir }} *(rw,sync,no_subtree_check,no_root_squash)"
-    #     line: " {{ nfs_remote_dir }} {{nfs_client_ip1}}(rw,sync,no_subtree_check,no_root_squash)  {{nfs_client_ip2}}(rw,sync,no_subtree_check,no_root_squash)"
-    #     state: present 
-    #     create: yes 
     - name: Apply Configuration 
       command: exportfs -ra 
     - name: Restart NFS Kernel Service 
