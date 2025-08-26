@@ -65,3 +65,14 @@ kubectl get secret <name> -o yaml
 kubectl describe secret <name> 
 
 ```
+
+### NFS
+```bash
+git clone url 
+cd kuberbernetes-breakdown/persistance/nfs-ansible 
+just --list 
+just ping-all
+just setup-nfs 
+
+```
+

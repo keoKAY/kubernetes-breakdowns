@@ -1,0 +1,41 @@
+# spring deployment that uses nfs 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-test-app
+spec:
+  selector:
+    matchLabels:
+      app: spring-demo-app
+  template:
+    metadata:
+      labels:
+        app: spring-demo-app
+    spec:
+      
+      # affinity:
+      #   nodeAffinity:
+      #       requiredDuringSchedulingIgnoredDuringExecution:
+      #         nodeSelectorTerms:
+      #         - matchExpressions:
+      #           - key: kubernetes.io/hostname
+      #             operator: NotIn
+      #             values:
+      #             - node1 # master1
+      containers:
+      - name: spring-app-cont
+        image: 69966/springgradleimg:1.1.1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        # volumeMounts: 
+        #   - name: my-image-vol
+        #     mountPath: /app/src/main/resources/images
+        ports:
+        - containerPort: 8080
+      # volumes: 
+      #   - name: my-image-vol
+      #     nfs: 
+      #       server: 10.148.0.2
+      #       path: /srv/nfs_shared/my_spring_storage
