@@ -94,3 +94,26 @@ kubectl get pvc
 kubectl get pv 
 
 ```
+
+
+#### Dynamic provision for nfs 
+
+```bash 
+# adding repository 
+helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+
+
+helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs-subdir-external-provisioner \
+    --set nfs.server=10.148.0.2 \
+    --set nfs.path=/srv/nfs_shared/dynamic_pvc
+
+helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs-subdir-external-provisioner \
+    --set nfs.server=192.168.56.10 \
+    --set nfs.path=/srv/nfs_shared
+
+kubectl get storageclass
+kubectl get sc 
+
+helm list 
+kubectl get deploy # look for nfs-external-provisioner 
+```
