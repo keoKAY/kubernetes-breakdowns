@@ -86,3 +86,11 @@ git fetch
 git pull 
 
 ```
+
+### PV and PVC 
+```bash
+# check for status Bound 
+kubectl get pvc 
+kubectl get pv 
+
+```

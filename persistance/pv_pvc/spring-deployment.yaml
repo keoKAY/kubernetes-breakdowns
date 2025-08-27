@@ -1,0 +1,27 @@
+# spring deployment that uses nfs 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-app
+spec:
+  selector:
+    matchLabels:
+      app: spring-app
+  template:
+    metadata:
+      labels:
+        app: spring-app
+    spec:
+      containers:
+      - name: spring-app-cont
+        #image: 69966/springgradleimg:1.1.1
+        image: 69966/springgradleimg:1.1.1
+        volumeMounts: 
+          - name: my-image-vol
+            mountPath: /app/src/main/resources/images
+        ports:
+        - containerPort: 8080
+      volumes: 
+        - name: my-image-vol
+          persistentVolumeClaim:
+            claimName: spring-storage-pvc
