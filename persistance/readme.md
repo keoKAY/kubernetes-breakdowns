@@ -76,3 +76,13 @@ just setup-nfs
 
 ```
 
+## GIT 
+```bash
+# to pull a new code from git 
+git status 
+git add .
+git stash 
+git fetch 
+git pull 
+
+```
