@@ -2,17 +2,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: spring-test-app
+  name: spring-app
 spec:
   selector:
     matchLabels:
-      app: spring-demo-app
+      app: spring-app
   template:
     metadata:
       labels:
-        app: spring-demo-app
+        app: spring-app
     spec:
-      
       # affinity:
       #   nodeAffinity:
       #       requiredDuringSchedulingIgnoredDuringExecution:
@@ -24,18 +23,16 @@ spec:
       #             - node1 # master1
       containers:
       - name: spring-app-cont
+        #image: 69966/springgradleimg:1.1.1
         image: 69966/springgradleimg:1.1.1
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        # volumeMounts: 
-        #   - name: my-image-vol
-        #     mountPath: /app/src/main/resources/images
+        volumeMounts: 
+          - name: my-image-vol
+            mountPath: /app/src/main/resources/images
         ports:
         - containerPort: 8080
-      # volumes: 
-      #   - name: my-image-vol
-      #     nfs: 
-      #       server: 10.148.0.2
-      #       path: /srv/nfs_shared/my_spring_storage
+      volumes: 
+        - name: my-image-vol
+          nfs:
+            # change to your actual server ip  
+            server: 10.148.0.2
+            path: /srv/nfs_shared/my_spring_storage
