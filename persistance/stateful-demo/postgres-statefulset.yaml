@@ -1,0 +1,42 @@
+# statefulset 
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres-statefulset
+spec:
+  selector:
+    matchLabels:
+      app: postgres-statefulset
+  serviceName: postgres-statefulset-svc
+  # 2 pods , 2pvc, 2pv
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: postgres-statefulset
+    spec:
+      containers:
+      - name: postgres-container
+        image: postgres
+        # configmap , secret 
+        env: 
+          - name: POSTGRES_PASSWORD
+            value: password123
+          - name: POSTGRES_USER
+            value: postgres
+          - name: POSTGRES_DB 
+            value: mydata_db
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - name: postgres-vol
+          mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: postgres-vol
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: nfs-client 
+      resources:
+        requests:
+          storage: 10Gi
