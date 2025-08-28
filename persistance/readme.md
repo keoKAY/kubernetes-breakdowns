@@ -117,3 +117,20 @@ kubectl get sc
 helm list 
 kubectl get deploy # look for nfs-external-provisioner 
 ```
+
+
+
+#### Create interactive container for testing FQDN 
+
+```bash
+kubectl run -it dns-test \
+  --rm \
+  --image=busybox \
+  --restart=Never \
+  -- sh
+
+# run to test DNS 
+nslookup postgres-statefulset-svc.default.svc.mycluster
+nslookup postgres-statefulset-svc.default.svc.cluster.local
+
+```

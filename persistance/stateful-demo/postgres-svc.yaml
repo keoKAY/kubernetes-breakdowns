@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-statefulset-svc
+spec:
+# define that it's headless service 
+  clusterIP: None
+  selector:
+    app: postgres-statefulset
+  ports:
+  - port: 5432
+    targetPort: 5432
+
+# FQDNS 
+# service.default.svc.cluster-name 
+# nslookup postgres-statefulset-svc.default.svc.mycluster
+
+# /etc/resolv.conf 
